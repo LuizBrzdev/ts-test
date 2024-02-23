@@ -6,10 +6,8 @@ class GetAllCategoriesUseCase {
         this.categoryRepository = categoryRepository;
     }
 
-    getAllCategories: () => CategoryDTO[] = () =>
+    call: () => CategoryDTO[] = () =>
         this.categoryRepository.getAllCategories();
-
 }
-
 
 export { GetAllCategoriesUseCase }

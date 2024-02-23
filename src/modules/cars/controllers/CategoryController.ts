@@ -8,15 +8,16 @@ import { GetAllCategoriesUseCase } from "../useCases/getAllCategories/GetAllCate
 
 
 
+
+
 class CategoryController {
 
     constructor(private getAllCategoriesUseCase: GetAllCategoriesUseCase, private createCategoryUseCase: CreateCategoryUseCase) {
-
         this.createCategoryUseCase = createCategoryUseCase;
+        this.getAllCategoriesUseCase = getAllCategoriesUseCase
     }
 
     public async createNewCategory (request: Request, response: Response) {
-
         const category: CategoryDTO = {
             name: request.body.name,
             description: request.body.description,
@@ -26,7 +27,8 @@ class CategoryController {
     }
 
     public async getAllCategories (response: Response) {
-        return sendReturn(response, response.statusCode, 'Data found', this.getAllCategoriesUseCase.getAllCategories())
+        const categories = this.getAllCategoriesUseCase.call();
+        return sendReturn(response, response.statusCode, 'Data found', categories);
     }
 
 
